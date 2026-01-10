@@ -1,4 +1,5 @@
 <?php
+require_once '../../includes/cors.php';
 
 //C:\Users\BR\Desktop\calmtech\php\htdocs\backend\api\teachers\attendance.php
 include_once '../../config/Database.php';

@@ -1,4 +1,5 @@
 <?php
+require_once '../../includes/cors.php';
 // // FILE: backend/api/teachers/grade_submission.php
 // // Grade a student's assignment submission
 // header('Access-Control-Allow-Origin: *');

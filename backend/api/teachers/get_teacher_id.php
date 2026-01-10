@@ -3,9 +3,7 @@
 <?php
 // FILE: backend/api/teachers/get_teacher_id.php
 // Updated for new database structure
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
-
+require_once '../../includes/cors.php';
 require_once '../../config/Database.php';
 
 try {

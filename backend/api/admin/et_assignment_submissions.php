@@ -1,11 +1,10 @@
 
 
 <?php
+require_once '../../includes/cors.php';
 // ============================================================================
 // FILE: backend/api/admin/get_assignment_submissions.php
 // ============================================================================
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
 require_once '../../config/database.php';
 
 $assignment_id = $_GET['assignment_id'] ?? null;

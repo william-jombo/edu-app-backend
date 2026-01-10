@@ -2,11 +2,10 @@
 
 
 <?php
+require_once '../../includes/cors.php';
 // ============================================================================
 // FILE: backend/api/admin/get_student_performance.php
 // ============================================================================
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
 require_once '../../config/database.php';
 
 $class_id = $_GET['class_id'] ?? null;

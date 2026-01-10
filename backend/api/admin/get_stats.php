@@ -61,11 +61,10 @@
 
 
 <?php
+require_once '../../includes/cors.php';
 // ============================================================================
 // FILE: backend/api/admin/get_dashboard_stats.php
 // ============================================================================
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
 
 require_once '../../config/database.php';
 

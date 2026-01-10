@@ -1,4 +1,5 @@
 <?php
+require_once '../../includes/cors.php';
 // FILE: backend/api/teachers/get_assignment_submissions.php
 // Get all submissions for a specific assignment
 header('Access-Control-Allow-Origin: *');

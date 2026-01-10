@@ -1,4 +1,5 @@
 <?php
+require_once '../../includes/cors.php';
 // FILE: backend/api/teachers/delete_lesson.php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');

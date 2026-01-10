@@ -1,8 +1,8 @@
 
 
 
-
 <?php
+require_once '../../includes/cors.php';
 // FILE: backend/api/teachers/get_submission_list.php
 // Updated for new database structure
 header('Access-Control-Allow-Origin: *');

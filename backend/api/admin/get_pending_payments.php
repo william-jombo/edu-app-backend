@@ -63,11 +63,11 @@ try {
                 p.amount,
                 p.payment_method,
                 p.academic_year,
-                p.semester,
-                p.transaction_reference,
-                p.status,
-                p.notes,
-                p.created_at,
+                require_once '../../includes/cors.php';
+                // ============================================================================
+                // FILE: backend/api/admin/get_pending_payments.php
+
+                require_once '../../config/database.php';
                 CONCAT(s.firstname, ' ', s.lastname) as student_name,
                 s.student_number,
                 u.email as student_email,

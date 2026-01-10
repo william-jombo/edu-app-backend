@@ -1,6 +1,7 @@
 
-
 <?php
+
+require_once '../../includes/cors.php';
 // // FILE: backend/api/teachers/add_grade.php  
 // // Fixed for YOUR exact tbl_grades structure
 // header('Access-Control-Allow-Origin: *');

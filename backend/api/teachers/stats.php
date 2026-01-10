@@ -60,6 +60,7 @@
 
 
 <?php
+require_once '../../includes/cors.php';
 // FILE: backend/api/teachers/stats.php
 // Updated for new database structure
 header('Access-Control-Allow-Origin: *');

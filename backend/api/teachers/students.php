@@ -77,9 +77,7 @@
 <?php
 // FILE: backend/api/teachers/students.php
 // Updated for new database structure
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
-
+require_once '../../includes/cors.php';
 require_once '../../config/Database.php';
 
 try {
@@ -90,10 +88,11 @@ try {
         ]);
         exit;
     }
-    
+
     $class_id = $_GET['class_id'];
+
     $teacher_id = $_GET['teacher_id'];
-    
+
     $database = new Database();
     $conn = $database->getConnection();
     

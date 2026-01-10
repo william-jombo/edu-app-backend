@@ -1,5 +1,5 @@
 <?php
-
+require_once '../../includes/cors.php';
 //C:\Users\BR\Desktop\calmtech\php\htdocs\backend\api\teachers\register_student_with_subjects.php
 header('Content-Type: application/json');
 include_once '../../config/database.php';

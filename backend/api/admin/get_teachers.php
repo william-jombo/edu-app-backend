@@ -108,9 +108,7 @@
 // ============================================================================
 // FILE: backend/api/admin/get_teachers.php
 // ============================================================================
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
-
+require_once '../../includes/cors.php';
 require_once '../../config/Database.php';
 
 try {

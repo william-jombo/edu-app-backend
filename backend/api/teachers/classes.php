@@ -7,6 +7,7 @@
 
 
 <?php
+require_once '../../includes/cors.php';
 // // FILE: backend/api/teachers/classes.php
 // // Get classes taught by teacher with student counts
 // require_once '../../config/Database.php';

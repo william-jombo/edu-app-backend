@@ -1,7 +1,6 @@
-
-
-
 <?php
+
+require_once '../../includes/cors.php';
 // FILE: backend/api/teachers/create_assignment.php
 // Updated with file upload support (PDF, videos, documents)
 header('Access-Control-Allow-Origin: *');

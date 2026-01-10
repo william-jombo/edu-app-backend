@@ -1,5 +1,6 @@
 
 <?php
+require_once '../../includes/cors.php';
 // // FILE: backend/api/teachers/subjects.php
 // // Get subjects taught by teacher from tbl_teacher_classes
 // require_once '../../config/Database.php';
