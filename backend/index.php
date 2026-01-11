@@ -1,18 +1,5 @@
 <?php
-// // Minimal status page to avoid Apache 403 when directory listing is disabled.
-// http_response_code(200);
-// header('Content-Type: text/plain; charset=utf-8');
-// echo "edu-app-backend: OK\n";
-
-?>
-
-
-
-
-
-<?php
-
-
+// Remove any blank lines or spaces above this line
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
