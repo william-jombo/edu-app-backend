@@ -5,6 +5,9 @@ $allowed_origins = [
     'http://localhost:5173',
     'http://localhost:3000',
     'http://127.0.0.1:5173',
+    'https://edu-app-backend.fly.dev',
+    'https://edu-app-frontend-nine.vercel.app',
+    'https://*.vercel.app'
     // Add your production frontend domain here, e.g. 'https://your-app.vercel.app'
 ];
 
