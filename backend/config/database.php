@@ -53,67 +53,67 @@
 
 
 <?php
-//C:\Users\BR\Desktop\calmtech\php\htdocs\backend\config\database.php
+// //C:\Users\BR\Desktop\calmtech\php\htdocs\backend\config\database.php
 
-header('Access-Control-Allow-Origin: http://localhost:5173');
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
-header('Access-Control-Allow-Credentials: true');
+// header('Access-Control-Allow-Origin: http://localhost:5173');
+// header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+// header('Access-Control-Allow-Headers: Content-Type, Authorization');
+// header('Access-Control-Allow-Credentials: true');
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit();
-}
+// if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+//     http_response_code(200);
+//     exit();
+// }
  
 
-//  private $host = "aws-1-us-east-1.pooler.supabase.com";
+// //  private $host = "aws-1-us-east-1.pooler.supabase.com";
+// //     private $db_name = "postgres";
+// //     private $username = "postgres.auknbtgbypmisvrowwzu";
+// //     private $password = "YOUR_PASSWORD_HERE";  // ⚠️ Put your actual password!
+// //     private $port = "5432";
+
+// //WJomBo.W/@Tw2111
+
+// class Database {
+//     // Supabase PostgreSQL Settings
+//     private $host = "aws-1-us-east-1.pooler.supabase.com";
 //     private $db_name = "postgres";
 //     private $username = "postgres.auknbtgbypmisvrowwzu";
-//     private $password = "YOUR_PASSWORD_HERE";  // ⚠️ Put your actual password!
+//     private $password = "WJomBo.W/@Tw2111";  // ⚠️ PASTE YOUR PASSWORD HERE!
 //     private $port = "5432";
+//     public $conn;
 
-//WJomBo.W/@Tw2111
+//     public function getConnection() {
+//         $this->conn = null;
 
-class Database {
-    // Supabase PostgreSQL Settings
-    private $host = "aws-1-us-east-1.pooler.supabase.com";
-    private $db_name = "postgres";
-    private $username = "postgres.auknbtgbypmisvrowwzu";
-    private $password = "WJomBo.W/@Tw2111";  // ⚠️ PASTE YOUR PASSWORD HERE!
-    private $port = "5432";
-    public $conn;
-
-    public function getConnection() {
-        $this->conn = null;
-
-        try {
-            // PostgreSQL connection
-            $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->db_name}";
+//         try {
+//             // PostgreSQL connection
+//             $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->db_name}";
             
-            $this->conn = new PDO(
-                $dsn,
-                $this->username,
-                $this->password,
-                [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES => false,
-                ]
-            );
+//             $this->conn = new PDO(
+//                 $dsn,
+//                 $this->username,
+//                 $this->password,
+//                 [
+//                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+//                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+//                     PDO::ATTR_EMULATE_PREPARES => false,
+//                 ]
+//             );
             
-            $this->conn->exec("SET NAMES 'UTF8'");
+//             $this->conn->exec("SET NAMES 'UTF8'");
             
-        } catch(PDOException $exception) {
-            echo json_encode([
-                "success" => false,
-                "message" => "Connection error: " . $exception->getMessage()
-            ]);
-            exit();
-        }
+//         } catch(PDOException $exception) {
+//             echo json_encode([
+//                 "success" => false,
+//                 "message" => "Connection error: " . $exception->getMessage()
+//             ]);
+//             exit();
+//         }
 
-        return $this->conn;
-    }
-}
+//         return $this->conn;
+//     }
+// }
 ?>
 
 
@@ -211,4 +211,71 @@ class Database {
 //         return $this->conn;
 //     }
 // }
+?>
+
+
+
+
+
+
+
+
+<?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Access-Control-Allow-Credentials: true');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+class Database {
+    private $host;
+    private $db_name;
+    private $username;
+    private $password;
+    private $port;
+    public $conn;
+
+    public function __construct() {
+        // Use environment variables (set these in Fly.io secrets)
+        $this->host = getenv('DB_HOST') ?: 'aws-1-us-east-1.pooler.supabase.com';
+        $this->db_name = getenv('DB_NAME') ?: 'postgres';
+        $this->username = getenv('DB_USER') ?: 'postgres.auknbtgbypmisvrowwzu';
+        $this->password = getenv('DB_PASSWORD');
+        $this->port = getenv('DB_PORT') ?: '5432';
+    }
+
+    public function getConnection() {
+        $this->conn = null;
+
+        try {
+            $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->db_name}";
+            
+            $this->conn = new PDO(
+                $dsn,
+                $this->username,
+                $this->password,
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                ]
+            );
+            
+            $this->conn->exec("SET NAMES 'UTF8'");
+            
+        } catch(PDOException $exception) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Connection error: " . $exception->getMessage()
+            ]);
+            exit();
+        }
+
+        return $this->conn;
+    }
+}
 ?>
