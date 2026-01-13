@@ -1,4 +1,4 @@
-<IfModule mod_rewrite.c>
+<!-- <IfModule mod_rewrite.c>
     RewriteEngine On
     
     # Don't handle OPTIONS here - let PHP handle it
@@ -8,12 +8,12 @@
     RewriteRule ^(.*)$ $1 [L]
 </IfModule>
 
-# NOTE: CORS headers are handled in PHP (includes/cors.php)
+# NOTE: CORS headers are handled in PHP (includes/cors.php) -->
 
 
 
-<!-- # .htaccess - Minimal config, CORS handled in PHP
+ # .htaccess - Minimal config, CORS handled in PHP
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-</IfModule> -->
+</IfModule> 
