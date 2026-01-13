@@ -1,7 +1,9 @@
+
+<!-- C:\Users\BR\Desktop\calmtech\php\htdocs\edu-app-backend\backend\index.php -->
+
+
 <?php
-// Remove any blank lines or spaces above this line
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
 
 echo json_encode([
     'success' => true,
@@ -15,4 +17,10 @@ echo json_encode([
         'teacher' => '/api/teacher/'
     ]
 ]);
-?>
+
+
+
+
+
+
+

@@ -1,62 +1,55 @@
-# # FROM php:8.2-apache
-
-# # # Copy all your PHP files to Apache's web directory
-# # COPY . /var/www/html/
-
-# # # Enable Apache rewrite module (for clean URLs)
-# # RUN a2enmod rewrite
-
-# # # Set permissions
-# # RUN chown -R www-data:www-data /var/www/html
-
-# # # Expose port 80
-# # EXPOSE 80
-
-# # # Apache starts automatically
-
-
-
-
-
-
-
-
-
 # FROM php:8.2-apache
 
-# # Install PostgreSQL PDO extension for Supabase
-# RUN apt-get update && apt-get install -y \
-#     libpq-dev \
-#     && docker-php-ext-install pdo pdo_pgsql \
-#     && apt-get clean
+# # Install PostgreSQL extension
+# RUN apt-get update && \
+#     apt-get install -y libpq-dev && \
+#     docker-php-ext-install pdo pdo_pgsql && \
+#     apt-get clean && \
+#     rm -rf /var/lib/apt/lists/*
 
-# # Copy all PHP files
+# # Enable Apache modules - IMPORTANT: headers module!
+# RUN a2enmod rewrite headers
+
+# # Copy files
 # COPY . /var/www/html/
 
-# # Create Apache configuration for your API
+# # Fix permissions
+# RUN chown -R www-data:www-data /var/www/html && \
+#     chmod -R 755 /var/www/html
+
+# # Configure Apache with CORS
 # RUN echo '<Directory /var/www/html/>\n\
 #     Options Indexes FollowSymLinks\n\
 #     AllowOverride All\n\
 #     Require all granted\n\
-# </Directory>' > /etc/apache2/conf-available/app.conf
+# </Directory>\n\
+# \n\
+# # CORS Configuration\n\
+# <IfModule mod_headers.c>\n\
+#     # Set CORS headers for Vercel\n\
+#     SetEnvIf Origin "^https://edu-app-taupe\\.vercel\\.app$" ACAO=$0\n\
+#     SetEnvIf Origin "^https://.*\\.vercel\\.app$" ACAO=$0\n\
+#     SetEnvIf Origin "^http://localhost:5173$" ACAO=$0\n\
+#     SetEnvIf Origin "^http://localhost:3000$" ACAO=$0\n\
+#     \n\
+#     Header always set Access-Control-Allow-Origin "%{ACAO}e" env=ACAO\n\
+#     Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"\n\
+#     Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"\n\
+#     Header always set Access-Control-Allow-Credentials "true"\n\
+#     Header always set Access-Control-Max-Age "86400"\n\
+#     \n\
+#     # Handle preflight OPTIONS requests\n\
+#     RewriteEngine On\n\
+#     RewriteCond %{REQUEST_METHOD} OPTIONS\n\
+#     RewriteRule ^(.*)$ $1 [R=200,L]\n\
+# </IfModule>' > /etc/apache2/conf-available/cors.conf
 
-# # Enable the configuration
-# RUN a2enconf app
+# # Enable CORS configuration
+# RUN a2enconf cors
 
-# # Enable Apache modules
-# RUN a2enmod rewrite
-
-# # Set permissions
-# RUN chown -R www-data:www-data /var/www/html \
-#     && chmod -R 755 /var/www/html
-
-# # Expose port 80
 # EXPOSE 80
 
-# # Start Apache
 # CMD ["apache2-foreground"]
-
-
 
 
 
@@ -67,39 +60,25 @@
 
 FROM php:8.2-apache
 
-# Install required extensions
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Install PostgreSQL extension
+RUN apt-get update && \
+    apt-get install -y libpq-dev && \
+    docker-php-ext-install pdo pdo_pgsql && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Enable Apache modules
 RUN a2enmod rewrite headers
 
-# Copy application files
+# Copy files
 COPY . /var/www/html/
 
-# Set proper permissions
+# Fix permissions
 RUN chown -R www-data:www-data /var/www/html && \
-    find /var/www/html -type d -exec chmod 755 {} \; && \
-    find /var/www/html -type f -exec chmod 644 {} \;
+    chmod -R 755 /var/www/html
 
-# Configure Apache
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
-    sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
-
-# Create custom Apache config
-RUN echo '<VirtualHost *:80>\n\
-    DocumentRoot /var/www/html\n\
-    <Directory /var/www/html>\n\
-        Options -Indexes +FollowSymLinks\n\
-        AllowOverride All\n\
-        Require all granted\n\
-    </Directory>\n\
-    ErrorLog ${APACHE_LOG_DIR}/error.log\n\
-    CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+# NOTE: CORS is handled in PHP via backend/includes/cors.php
+# Do not set Access-Control-Allow-Origin here to avoid duplicate headers.
 
 EXPOSE 80
 

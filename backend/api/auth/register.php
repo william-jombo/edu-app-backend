@@ -7,11 +7,7 @@
 // backend/api/common/register_student_with_subjects.php
 // Updated for new database structure
 
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
-
+require_once '../../includes/cors.php';
 include_once '../../config/database.php';
 
 $database = new Database();

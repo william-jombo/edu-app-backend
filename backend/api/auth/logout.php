@@ -1,4 +1,5 @@
 <?php
+//C:\Users\BR\Desktop\calmtech\php\htdocs\edu-app-backend\backend\api\auth\logout.php
 session_start();
 header('Content-Type: application/json');
 

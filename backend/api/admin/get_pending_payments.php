@@ -48,7 +48,7 @@
 
 
 
-
+<!-- C:\Users\BR\Desktop\calmtech\php\htdocs\edu-app-backend\backend\api\admin\get_pending_payments.php -->
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 require_once '../../config/database.php';

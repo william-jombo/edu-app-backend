@@ -1,4 +1,6 @@
 <?php
+
+//C:\Users\BR\Desktop\calmtech\php\htdocs\edu-app-backend\backend\api\students\ask_question.php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
