@@ -1,12 +1,19 @@
-# .htaccess - DO NOT set CORS headers here (handled by cors.php)
-
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
-    # Handle OPTIONS preflight requests
-    RewriteCond %{REQUEST_METHOD} OPTIONS
-    RewriteRule ^(.*)$ $1 [R=200,L]
+    # Don't handle OPTIONS here - let PHP handle it
+    # Just allow .htaccess to work
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ $1 [L]
 </IfModule>
 
-# NOTE: CORS headers are handled in PHP (backend/includes/cors.php)
-# to avoid duplicate headers
+# NOTE: CORS headers are handled in PHP (includes/cors.php)
+
+
+
+<!-- # .htaccess - Minimal config, CORS handled in PHP
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+</IfModule> -->
