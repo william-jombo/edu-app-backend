@@ -1,8 +1,11 @@
-<?php
-// CORS configuration - Updated to support all Vercel deployments
+﻿<?php
+// CORS configuration - Updated for maximum compatibility
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
-// Allowed origins
+// Log for debugging
+error_log("CORS: Received origin: " . $origin);
+
+// Allow these specific origins
 $allowed_origins = [
     'http://localhost:5173',
     'http://localhost:3000',
@@ -10,26 +13,27 @@ $allowed_origins = [
     'https://edu-app-taupe.vercel.app',
 ];
 
-// Determine which origin to allow
 $allow_origin = '';
 
-// Check if origin is in allowed list
+// Check exact matches
 if (in_array($origin, $allowed_origins, true)) {
     $allow_origin = $origin;
 } 
-// Allow ALL Vercel preview deployments (*.vercel.app)
-// FIXED: Check if the origin ends with .vercel.app
-elseif ($origin && str_ends_with($origin, '.vercel.app')) {
+// Check if ends with .vercel.app (for all preview deployments)
+elseif ($origin && (substr($origin, -11) === '.vercel.app')) {
     $allow_origin = $origin;
 }
 
-// Only send headers if we have a valid origin
+// Send headers if we have a valid origin
 if ($allow_origin) {
     header('Access-Control-Allow-Origin: ' . $allow_origin);
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
     header('Access-Control-Max-Age: 86400');
+    error_log("CORS: Sent headers for origin: " . $allow_origin);
+} else {
+    error_log("CORS: No matching origin");
 }
 
 // Handle preflight
@@ -37,3 +41,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
+?>
