@@ -74,7 +74,7 @@ RUN a2enmod rewrite headers
 COPY . /var/www/html/
 
 # Fix permissions
-RUN chown -R www-data:www-data /var/www/html && \
+RUN chown -R www-data:www-data /var/www/ && \
     chmod -R 755 /var/www/html
 
 # NOTE: CORS is handled in PHP via backend/includes/cors.php
