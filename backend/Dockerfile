@@ -71,11 +71,11 @@ RUN apt-get update && \
 RUN a2enmod rewrite headers
 
 # Copy files
-COPY . /var/www/html/
+COPY . /var/www/
 
 # Fix permissions
 RUN chown -R www-data:www-data /var/www/ && \
-    chmod -R 755 /var/www/html
+    chmod -R 755 /var/www/
 
 # NOTE: CORS is handled in PHP via backend/includes/cors.php
 # Do not set Access-Control-Allow-Origin here to avoid duplicate headers.
