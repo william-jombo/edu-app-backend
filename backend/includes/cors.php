@@ -54,6 +54,6 @@
 // Requests come from Vercel server-to-server, not from browser
 
 // Optional: Keep logging for debugging
-error_log("Request received: " . $_SERVER['REQUEST_METHOD'] . " from " . ($_SERVER['HTTP_ORIGIN'] ?? 'no origin'));
+//error_log("Request received: " . $_SERVER['REQUEST_METHOD'] . " from " . ($_SERVER['HTTP_ORIGIN'] ?? 'no origin'));
 
 // That's it! No headers, no preflight handling needed.
