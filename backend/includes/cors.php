@@ -1,4 +1,6 @@
 ﻿<?php
+
+//C:\Users\BR\Desktop\calmtech\php\htdocs\edu-app-backend\backend\includes\cors.php
 // CORS configuration - Updated for maximum compatibility
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
@@ -27,7 +29,7 @@ elseif ($origin && (substr($origin, -11) === '.vercel.app')) {
 // Send headers if we have a valid origin
 if ($allow_origin) {
     header('Access-Control-Allow-Origin: ' . $allow_origin);
-    header('Access-Control-Allow-Credentials: true');
+    //header('Access-Control-Allow-Credentials: false');
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
     header('Access-Control-Max-Age: 86400');

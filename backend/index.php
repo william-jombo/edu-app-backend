@@ -3,7 +3,7 @@
 
 
 <?php
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 
 echo json_encode([
     'success' => true,
@@ -17,10 +17,3 @@ echo json_encode([
         'teacher' => '/api/teacher/'
     ]
 ]);
-
-
-
-
-
-
-
