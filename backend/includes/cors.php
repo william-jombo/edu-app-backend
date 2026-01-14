@@ -29,7 +29,7 @@ elseif ($origin && (substr($origin, -11) === '.vercel.app')) {
 // Send headers if we have a valid origin
 if ($allow_origin) {
     header('Access-Control-Allow-Origin: ' . $allow_origin);
-    //header('Access-Control-Allow-Credentials: false');
+    header('Access-Control-Allow-Credentials: false');
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
     header('Access-Control-Max-Age: 86400');
