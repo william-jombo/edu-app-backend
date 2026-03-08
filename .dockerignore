@@ -1,0 +1,118 @@
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+*.md
+CHANGELOG.md
+LICENSE
+
+# Environment files (we'll use Fly.io secrets instead)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Fly.io files
+fly.toml
+.dockerignore
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Node modules (if any)
+node_modules/
+npm-debug.log
+
+# Composer (if any)
+vendor/
+composer.lock
+composer.phar
+
+# Build artifacts
+dist/
+build/
+
+# Test files
+tests/
+*.test.php
+phpunit.xml
+
+# Cache
+cache/
+*.cache
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Database files (should never be in Docker image)
+*.sql
+*.sqlite
+*.db
+
+# Large media files (handle via volume mounts)
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+
+# Compressed files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Private keys and certificates
+*.pem
+*.key
+*.cert
+*.crt
+id_rsa
+id_rsa.pub
+
+# Coverage reports
+coverage/
+.coverage
+htmlcov/
+
+# Python (if any helper scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# Deployment scripts
+deploy.sh
+deploy.ps1
+setup-deployment.ps1

@@ -1,0 +1,42 @@
+# fly.toml app configuration file
+#C:\Users\BR\Desktop\calmtech\php\htdocs\edu-app-backend\fly.toml
+app = "edu-app-backend"
+primary_region = "lhr"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  ENVIRONMENT = "production"
+  PHP_VERSION = "8.2"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+  [http_service.concurrency]
+    type = "requests"
+    hard_limit = 250
+    soft_limit = 200
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+# Temporarily disable health check to see if app starts
+# [[http_service.checks]]
+#   interval = "30s"
+#   timeout = "5s"
+#   grace_period = "10s"
+#   method = "GET"
+#   path = "/api/common/test_path.php"
+
+[[mounts]]
+  source = "uploads_data"
+  destination = "/var/www/html/uploads"
+  initial_size = "1gb"
